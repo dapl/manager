@@ -1,0 +1,35 @@
+.container
+  %nav.navbar.navbar-default.navbar-fixed-top
+    .container-fluid
+      .navbar-header
+        %button.navbar-toggle.collapsed(type="button"){data: {toggle: "collapse", target: "#navbar"}}
+          %i.fa.fa-bars
+        = link_to "DAPL", "/#/users/me", :class => 'navbar-brand'
+      #navbar.navbar-collapse.collapse(ng-controller="HeaderCtrl")
+        %ul.navbar-nav.nav
+          -#%li{"ng-class"=>"{active: isActive('/') || isActive('/home')}"}
+          -#  = link_to "/#/" do
+          -#    %i.fa.fa-home
+          -#    Home
+          %li{"ng-class"=>"{active: isActive('/users')}"}
+            = link_to "/#/users" do
+              %i.fa.fa-user
+              Users
+          %li{"ng-class"=>"{active: isActive('/groups')}"}
+            = link_to "/#/groups" do
+              %i.fa.fa-users
+              Groups
+        %ul.navbar-nav.nav.pull-right
+          %li.link.dropdown.pull-right
+            %a.dropdown-toggle{data: {toggle: 'dropdown'}}
+              %i.fa.fa-user
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                = link_to "/#/users/me", title: 'edit profile' do
+                  %i.fa.fa-cog
+                  Profile
+              %li
+                = link_to destroy_user_session_path, method: 'delete', title: 'logout' do
+                  %i.fa.fa-sign-out
+                  Logout

@@ -1,0 +1,19 @@
+%div
+  %div.modal-header
+    %h3 Add User to Group
+
+  %div.modal-body
+    %form
+      .form-group(ng-class="{'has-error': error}")
+        %label.control-label(for="user")
+          Select User
+        -#%input.form-control#username(type="text" placeholder="enter unix username" ng-model="user.login")
+        %select#user(ng-model="selected")
+          %option(ng-repeat="user in users" value="{{user.login}}")
+            {{user.name}}
+
+  %div.modal-footer
+    %button.btn.btn-primary(type="button" ng-click="ok()")
+      OK
+    %button.btn.btn-danger(type="button" ng-click="cancel()")
+      Cancel

@@ -1,0 +1,16 @@
+%div
+  %div.modal-header
+    %h3 Add Key to User
+
+  %div.modal-body
+    %form
+      .form-group(ng-class="{'has-error': error}")
+        %label.control-label(for="key")
+          SSH Key
+        %input.form-control#key(type="text" placeholder="enter ssh key" ng-model="key")
+
+  %div.modal-footer
+    %button.btn.btn-primary(type="button" ng-click="ok()")
+      OK
+    %button.btn.btn-danger(type="button" ng-click="cancel()")
+      Cancel

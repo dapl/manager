@@ -1,0 +1,12 @@
+
+//= require_tree .
+//= require_self
+
+body {
+    div.editable-click, a.editable-click {
+        color: black;
+        border-bottom: none;
+        border-left: 5px solid gray;
+        padding-left: 5px;
+    }
+}

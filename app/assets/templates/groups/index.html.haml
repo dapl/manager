@@ -1,0 +1,32 @@
+%div(ng-controller="GroupCtrl")
+  %div.row
+    %div.col-xs-12
+      %div.dapl-title
+        %div.pull-left
+          %h2
+            Groups
+            %span.badge
+              {{groups.length||0}}
+        %div.pull-right
+          %a.btn(ng-click="addGroup()")
+            %i.fa.fa-circle-plus
+            New Group
+
+  %div.row
+    %div.col-xs-12
+      %table
+        %thead
+          %tr
+            %th GID
+            %th Name
+            %th Members
+
+        %tbody
+          %tr(ng-repeat="group in groups")
+            %td
+              {{group.gid}}
+            %td
+              %a(ng-href="/#/groups/{{group.name}}")
+                {{group.name}}
+            %td
+              {{group.members.length}}

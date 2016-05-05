@@ -1,0 +1,38 @@
+%div(ng-controller="UserCtrl")
+  %div.row
+    %div.col-xs-12
+      %div.dapl-title
+        %div.pull-left
+          %h2
+            Users
+            %span.badge
+              {{users.length||0}}
+        %div.pull-right
+          %a.btn(ng-click="addUser()")
+            %i.fa.fa-circle-plus
+            New User
+
+  %div.row
+    %div.col-xs-12
+      %table
+        %thead
+          %tr
+            %th UID
+            %th Login
+            %th Name
+            %th Enabled
+            %th Keys#
+
+        %tbody
+          %tr(ng-repeat="user in users" ng-class="{danger: !user.enabled}")
+            %td
+              {{user.uid}}
+            %td
+              %a(ng-href="/#/users/{{user.login}}")
+                {{user.login}}
+            %td
+              {{user.name}}
+            %td
+              {{user.enabled}}
+            %td
+              {{user.keys.length}}

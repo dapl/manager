@@ -1,0 +1,36 @@
+!!!
+%html(ng-app="Dapl")
+  - min = Rails.env.development? ? '' : '.min'
+  %head
+    = favicon_link_tag 'favicon.ico'
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+      %title= content_for?(:title) ? yield(:title) : "DAPL"
+      %meta{:content => content_for?(:description) ? yield(:description) : "DAPL", :name => "description"}
+        = stylesheet_link_tag "application", :media => "all"
+        = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome#{min}.css"
+        = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/0.4.4/toaster.css"
+        -#= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap#{min}.css"
+        = csrf_meta_tags
+        = yield(:head)
+  %body{:class => "#{controller_name} #{action_name}"}
+    = render 'layouts/navigation'
+
+    #main{:role => "main"}
+      .container
+        .row
+          .span12
+            = render 'layouts/messages'
+            = yield
+        %footer
+          %toaster-container(toaster-options="{'position-class': 'toast-bottom-right'}")
+
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular#{min}.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route#{min}.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource#{min}.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate#{min}.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui#{min}.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls#{min}.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/2.0.0/toaster#{min}.js"
+    = javascript_include_tag "//code.jquery.com/jquery-2.1.4#{min}.js"
+    -#= javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap#{min}.js"
+    = javascript_include_tag 'application'

@@ -1,0 +1,27 @@
+!!!
+%html(ng-app="Dapl")
+  - min = Rails.env.development? ? '' : '.min'
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+      %title= content_for?(:title) ? yield(:title) : "Dapl"
+      %meta{:content => content_for?(:description) ? yield(:description) : "Dapl", :name => "description"}
+        = stylesheet_link_tag "application", :media => "all"
+        = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome#{min}.css"
+        = csrf_meta_tags
+        = yield(:head)
+  %body{:class => "#{controller_name} #{action_name}"}
+    #login{:role => "main"}
+      .centerbox
+        = yield
+    / ! end of #main
+
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular#{min}.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route#{min}.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource#{min}.js"
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate#{min}.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui#{min}.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.2/ui-bootstrap-tpls#{min}.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/2.0.0/toaster#{min}.js"
+    = javascript_include_tag "//code.jquery.com/jquery-2.1.4#{min}.js"
+    -#= javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap#{min}.js"
+    = javascript_include_tag 'application'

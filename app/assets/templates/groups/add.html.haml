@@ -1,0 +1,16 @@
+%div
+  %div.modal-header
+    %h3 Add Group
+
+  %div.modal-body
+    %form
+      .form-group(ng-class="{'has-error': error}")
+        %label.control-label(for="groupname")
+          Group Name
+        %input.form-control#groupname(type="text" placeholder="enter group name" ng-model="group")
+
+  %div.modal-footer
+    %button.btn.btn-primary(type="button" ng-click="ok()")
+      OK
+    %button.btn.btn-danger(type="button" ng-click="cancel()")
+      Cancel

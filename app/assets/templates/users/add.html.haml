@@ -1,0 +1,31 @@
+%div
+  %div.modal-header
+    %h3 Add User
+
+  %div.modal-body
+    %form
+      .form-group(ng-class="{'has-error': error}")
+        %label.control-label(for="username")
+          Username
+        %input.form-control#username(type="text" placeholder="enter unix username" ng-model="user.login")
+
+      .form-group(ng-class="{'has-error': error}")
+        %label.control-label(for="first")
+          First Name
+        %input.form-control#first(type="text" placeholder="enter first name" ng-model="user.first_name")
+
+      .form-group(ng-class="{'has-error': error}")
+        %label.control-label(for="last")
+          Last Name
+        %input.form-control#last(type="text" placeholder="enter last name" ng-model="user.last_name")
+
+      .form-group(ng-class="{'has-error': error}")
+        %label.control-label(for="key")
+          Key
+        %input.form-control#key(type="text" placeholder="enter ssh key" ng-model="user.key")
+
+  %div.modal-footer
+    %button.btn.btn-primary(type="button" ng-click="ok()")
+      OK
+    %button.btn.btn-danger(type="button" ng-click="cancel()")
+      Cancel

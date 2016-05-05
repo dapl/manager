@@ -1,0 +1,92 @@
+%div(ng-controller="UserShowCtrl")
+  %div.row
+    %div.col-xs-12
+      %div.dapl-title
+        %div.pull-left
+          %h2
+            {{user.login}} &nbsp;
+            %small
+              {{user.uid}}
+        %div.pull-right
+          %a.btn(ng-show="isAdmin && user.enabled == true" ng-click="disable()")
+            %i.fa.fa-power-off
+            Disable
+          %a.btn(ng-show="isAdmin && user.enabled == false" ng-click="enable()")
+            %i.fa.fa-power-off
+            Enable
+          %a.btn(ng-show="isMe || isAdmin" ng-click="changePassword()")
+            %i.fa.fa-lock
+            Change Password
+        %table
+          %tr
+            %th Name
+            %td
+              %div(editable-text="user.name" onbeforesave="updateName({name: $data})")
+                {{user.name}} &nbsp;
+          %tr
+            %th Email
+            %td
+              %div(editable-text="user.email" onbeforesave="updateEmail({email: $data})")
+                {{user.email}} &nbsp;
+          %tr
+            %th Shell
+            %td
+              {{user.shell}}
+          %tr(ng-class="{'danger': !user.enabled}")
+            %th Enabled?
+            %td
+              {{user.enabled}}
+          %tr
+            %th DN
+            %td
+              {{user.dn}}
+  -#%tr
+  -#  %th Login
+  -#  %td
+  -#    {{user.login}}
+  -#%tr
+  -#  %th UID
+  -#  %td
+  -#    {{user.uid}}
+
+  %div.row
+    %div.col-xs-12
+      %div.dapl-title
+        %div.pull-left
+          %h2
+            Groups
+        %div.pull-right
+          %div(ng-show="isAdmin")
+            %a.btn(ng-click="addGroup()")
+              %i.fa.fa-plus-circle
+              Add Group
+
+        %table
+          %tr(ng-repeat="group in user.groups")
+            %td
+              %a(ng-href="/#/groups/{{group}}")
+                {{group}}
+            %td(style="text-align: right; width: 50px;")
+              %a.btn.btn-xs.btn-danger(ng-click="removeGroup(group)" ng-show="isAdmin")
+                %i.fa.fa-times-circle
+
+  %div.row
+    %div.col-xs-12
+      %div.dapl-title
+        %div.pull-left
+          %h2
+            Keys
+        %div.pull-right
+          %div(ng-show="isMe || isAdmin")
+            %a.btn(ng-click="addKey()")
+              %i.fa.fa-plus-circle
+              Add Key
+
+        %table
+          %tr(ng-repeat="key in user.keys")
+            %td
+              {{key}}
+            %td(style="text-align: right; width: 50px;")
+              %a.btn.btn-xs.btn-danger(ng-click="removeKey(key)" ng-show="isMe || isAdmin")
+                %i.fa.fa-times-circle
+

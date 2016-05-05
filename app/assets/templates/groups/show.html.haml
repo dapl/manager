@@ -1,0 +1,42 @@
+%div(ng-controller="GroupShowCtrl")
+  %div.row
+    %div.col-xs-12
+      %div.dapl-title
+        %div.pull-left
+          %h2
+            {{group.name}} &nbsp;
+            %small
+              {{group.gid}}
+        %div.pull-right
+          %a.btn.btn-danger(ng-show="isAdmin " ng-click="destroy()")
+            %i.fa.fa-times-circle
+            Delete
+        %table
+          %tr
+            %th Name
+            %td
+              {{group.name}}
+          %tr
+            %th Members
+            %td
+              {{group.members.length}}
+
+  %div.row
+    %div.col-xs-12
+      %div.dapl-title
+        %div.pull-left
+          %h2
+            Members
+        %div.pull-right
+          %a.btn(ng-click="addUser()" ng-show="isAdmin")
+            %i.fa.fa-plus-circle
+            Add User
+
+        %table
+          %tr(ng-repeat="user in group.members")
+            %td
+              %a(ng-href="/#/users/{{user}}")
+                {{user}}
+            %td(style="text-align: right; width: 50px;")
+              %a.btn.btn-xs.btn-danger(ng-click="removeUser(user)" ng-show="isAdmin")
+                %i.fa.fa-times-circle
