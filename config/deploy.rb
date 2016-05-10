@@ -1,5 +1,5 @@
 set :application, "dapl"
-set :repo_url, 'git@github.com:shawncatz/dapl'
+set :repo_url, 'git@github.com:dapl/manager'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
