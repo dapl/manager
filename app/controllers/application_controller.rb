@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
 
   # helper for rendering failure
   def render_failure(message)
+    logger.error "failure: #{message}"
     render json: {success: false, error: message}, status: :unprocessable_entity
   end
 end

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     delete '/groups/:group', to: "users#remove_group"
 
     post '/keys', to: "users#add_key"
-    delete '/keys/:key_name', to: "users#remove_key"
+    delete '/keys/:key_name', to: "users#remove_key", :constraints  => { :key_name => /[0-z\.]+/ }
   end
 
   resources :groups do

@@ -1,4 +1,6 @@
 require 'net/ldap'
+require 'base64'
+require 'digest'
 
 module LDAP
   class Connection
@@ -81,17 +83,17 @@ module LDAP
 
     def user_password(login, password)
       user = get_user(login)
-      @ldap.modify(dn: user.dn, operations: [[:replace, :userpassword, password]])
+      @ldap.modify(dn: user.dn, operations: [[:replace, :userPassword, password_ssha(password)]])
     end
 
     def user_disable(login)
       user = get_user(login)
-      @ldap.modify(dn: user.dn, operations: [[:replace, :employeetype, "0"], [:replace, :loginshell, "/bin/false"]])
+      @ldap.modify(dn: user.dn, operations: [[:replace, :employeeType, "0"], [:replace, :loginShell, "/bin/false"]])
     end
 
     def user_enable(login)
       user = get_user(login)
-      @ldap.modify(dn: user.dn, operations: [[:replace, :employeetype, "1"], [:replace, :loginshell, "/bin/bash"]])
+      @ldap.modify(dn: user.dn, operations: [[:replace, :employeeType, "1"], [:replace, :loginShell, "/bin/bash"]])
     end
 
     def user_group_add(login, group)
@@ -111,7 +113,7 @@ module LDAP
 
     def user_key_remove(login, key_name)
       user = get_user(login)
-      key = user.keys.detect { |e| e.split.last == key_name }
+      key = user.keys.detect { |e| e.split(' ').last == key_name }
       raise "could not find key #{key_name}" unless key
       @ldap.modify(dn: user.dn, operations: [[:delete, :sshpublickey, key]])
     end
@@ -136,6 +138,14 @@ module LDAP
       end
       puts ops.inspect
       @ldap.modify(dn: user.dn, operations: ops)
+    end
+
+    def new_salt
+      16.times.inject('') {|t| t << rand(16).to_s(16)}
+    end
+
+    def password_ssha(password, salt=new_salt)
+      '{SSHA}' + Base64.encode64("#{Digest::SHA1.digest("#{password}#{salt}")}#{salt}").chomp
     end
 
     def groups

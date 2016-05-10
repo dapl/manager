@@ -8,6 +8,10 @@ module LDAP
       @_data.objectclass
     end
 
+    def attribute_names
+      @_data.attribute_names
+    end
+
     def dn
       @_data.dn
     end

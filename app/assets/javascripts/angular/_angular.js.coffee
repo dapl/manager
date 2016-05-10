@@ -28,7 +28,7 @@ app.factory 'Session', ['$rootScope', '$location', 'User', ($rootScope, $locatio
 
   User.get('me').then (user)->
     _user = user
-    _admin = user.groups && 'ldm' in user.groups # TODO: make this configurable
+    _admin = user.groups && 'dapl' in user.groups # TODO: make this configurable
 
   path: (path, exact = false)->
     if exact

@@ -87,13 +87,15 @@ class UsersController < ApplicationController
 
   def password
     login = params[:id]
-    password = params[:password]
-    confirm = params[:confirmation]
+    password = params[:user][:password]
+    confirm = params[:user][:confirmation]
 
     raise "not authorized" unless is_admin || is_me(login)
 
     if !login
       raise "login not set"
+    elsif !password
+      raise "password not set"
     elsif password != confirm
       raise "passwords do not match"
     elsif LDAP::User.password(login, password)

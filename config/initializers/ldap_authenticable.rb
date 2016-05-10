@@ -13,7 +13,7 @@ module Devise
             attrs.merge!(email: entry.email) if entry.email
             attrs.merge!(name: entry.name) if entry.name
 
-            if entry.groups.include?('ldm')
+            if entry.groups.include?('dapl')
               attrs.merge!(role: 2)
             else
               attrs.merge!(role: 0)

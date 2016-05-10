@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    entry.groups.include?('ldm') # TODO: make this configurable
+    entry.groups.include?('dapl') # TODO: make this configurable
   end
 
   def disabled?

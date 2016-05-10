@@ -2,6 +2,8 @@
   = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f|
     %h3 Sign in
     = devise_error_messages!
+    .error
+      = render 'layouts/messages'
     .form-group
       = f.label :login
       = f.text_field :login, :autofocus => true, :class => 'form-control'

@@ -8,7 +8,7 @@
             %span.badge
               {{groups.length||0}}
         %div.pull-right
-          %a.btn(ng-click="addGroup()")
+          %a.btn(ng-click="addGroup()" ng-show="isAdmin")
             %i.fa.fa-circle-plus
             New Group
 
